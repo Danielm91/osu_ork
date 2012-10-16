@@ -1,0 +1,22 @@
+The first thing you need to do to get the ork toolchain going is to download
+the avr toolchain. You can do this by running the following commands in your
+terminal (make sure you are in this directory for the later parts):
+
+sudo apt-get install gcc-avr
+sudo apt-get install avr-libc
+sudo apt-get install avrdude
+
+This will allow you to compile avr-c code and load lit onto avr mcu's with
+standard programmers.
+
+The next thing you should do is install the cli_linux bootloader so you can
+program the ork through USB. To do this, make it an executable (its in this
+directory) then copy it to your bin. Like this:
+
+chmod +x cli_linux
+sudo cp cli_linux /usr/bin
+
+That should get you to a point where you can use the makefile to compile and
+write the example code to the ork kit by typing:
+
+sudo make program
