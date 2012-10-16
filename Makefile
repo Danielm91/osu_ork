@@ -37,7 +37,7 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0
 ## Include Directories
 INCLUDES = -I ../../libraries
 
-SOURCES = uart.c OrkMain.c OrkLib/OrkCore.c OrkLib/OrkMotorBasic.c
+SOURCES = OrkMain.c OrkLib/OrkCore.c OrkLib/OrkMotorBasic.c
 ## Objects that must be built in order to link
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -72,6 +72,7 @@ program: all
 	#avrdude -c osuisp2 -p t861 -e -U flash:w:$(PROJECT).hex	-B 10
 	#avrdude -c avrispmkII -P usb -p t861 -e -U flash:w:$(PROJECT).hex	-B 10
 	#avrdude -c avrispv2 -p t861 -P com4 -e -U flash:w:$(PROJECT).hex
+	cli_linux -v -w -mmcu=atmega32u4 $(PROJECT).hex
 ## Clean target
 .PHONY: clean
 clean:
