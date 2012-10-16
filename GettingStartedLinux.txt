@@ -20,3 +20,6 @@ That should get you to a point where you can use the makefile to compile and
 write the example code to the ork kit by typing:
 
 sudo make program
+
+Make sure that you are in programming mode (jumper on programming header) to
+program and run mode to run. Press reset after switching the jumper to swap.
