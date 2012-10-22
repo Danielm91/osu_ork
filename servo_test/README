@@ -1,0 +1,3 @@
+This is example Servo PWM code for PB7 (OCR0A). Similar settings are available
+for other PWM channels, look at the datasheet to find out which ones, then
+set similar settings.
