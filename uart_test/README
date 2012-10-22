@@ -1,0 +1,5 @@
+To make UART work, you will need to connect the communicating device to ground, RX, and TX.
+
+RX and TX on the Atmega is PD2(Rx) and PD3(Tx).
+
+Check the ORK schematic to figure out which parts of the header are connected to these pins
