@@ -38,7 +38,7 @@
   
  void initializeMotorDriver();
  
- void setMotor(unsigned char motorAddress, char speed);
+ void setMotor(unsigned char motorAddress, int speed);
  
  #endif
  

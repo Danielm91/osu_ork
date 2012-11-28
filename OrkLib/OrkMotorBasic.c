@@ -35,13 +35,14 @@
  */
  void initializeMotorDriver()
  {
-	TCCR1A = 0b10101001;
+	
+	TCCR1A = 0b10000001;
 	TCCR1B = 0b00001001;
 	TCCR1C = 0b00000000;
 	
 	TCCR4A = 0b10000010;
 	TCCR4B = 0b00000001;
-	TCCR4C = 0b10001001;
+	TCCR4C = 0b10000001;
 	TCCR4D = 0b00000000;
 	TCCR4E = 0b00000000;
 	
@@ -56,6 +57,12 @@
 	DDRB |= (1<<5) | (1<<6);
 	DDRC |= (1<<7);
 	DDRD |= (1<<7);
+
+	//if using l298, uncomment these lines
+	//DDRB |= (1<<5);
+	//PORTB |= (1<<5);
+	//DDRE |= (1<<6);
+	//PORTE |= (1<<6);
  }
  
  /**
@@ -63,36 +70,31 @@
  * @param motorAddress Selected motor for speed setting, LeftMotor or RightMotor
  * @param speed Speed to set the motor to -128 to +127
  */
- void setMotor(unsigned char motorAddress, char speed)
+ void setMotor(unsigned char motorAddress, int speed)
  {
-	unsigned char speedPlus;
-	unsigned char speedMinus;
-	
-	if(speed>0)
-	{
-		speedPlus = 128+speed;
-		speedMinus = 127-speed;
+
+	if(speed < 0){
+		speed = 255 + speed;
+		if(motorAddress == LeftMotor){
+		PORTB |= (1<<6);
+		}
+		else if(motorAddress == RightMotor){
+		PORTD |= (1<<7);
+		}
 	}
-	else if(speed<0)
-	{
-		speedPlus = 128+speed;
-		speedMinus = 127-speed;
+	else{
+		if(motorAddress == LeftMotor){
+		PORTB &= ~(1<<6);
+		}
+		else if(motorAddress == RightMotor){
+		PORTD &= ~(1<<7);
+		}
 	}
-	else
-	{
-		speedPlus = 255;
-		speedMinus = 255;
+	if(motorAddress == LeftMotor){
+		OCR1A = speed;
 	}
-	
-	if(motorAddress == LeftMotor)
-	{
-		OCR1A = speedMinus;
-		OCR1B = speedPlus;
-	} 
-	else if(motorAddress == RightMotor)
-	{
-		OCR4A = speedMinus;
-		OCR4D = speedPlus;
+	else if(motorAddress == RightMotor){
+		OCR4A = speed;
 	}
  }
  
