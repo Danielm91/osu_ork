@@ -75,7 +75,7 @@
  	if(speed > 255){
 		speed = 255;
 	}
-	else if(speec < -255){
+	else if(speed < -255){
 		speed = -255;
 	}
 
