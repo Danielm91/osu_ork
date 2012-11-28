@@ -72,6 +72,12 @@
  */
  void setMotor(unsigned char motorAddress, int speed)
  {
+ 	if(speed > 255){
+		speed = 255;
+	}
+	else if(speec < -255){
+		speed = -255;
+	}
 
 	if(speed < 0){
 		speed = 255 + speed;
